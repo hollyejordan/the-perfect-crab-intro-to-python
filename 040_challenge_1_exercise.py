@@ -27,9 +27,45 @@ from lib.helpers import check_that_these_are_equal
 print("")
 print("Function: report_long_words")
 
-def report_long_words(words):
-  pass
+# removes words that are shorter than 10 letters and don't contain a hyphen
+def remove_shorter_than_10(words):
 
+  for word in words.copy():
+    if len(word) <= 10 or "-" in word:
+      words.remove(word)
+  
+  return words
+
+# shortens words that are longer than 15 letters down to 15 and adds an ellipsis if so
+def shorten_words(words):
+
+  shortenedWords = []
+
+  for word in words:
+    if len(word) > 15:
+      shortenedWords.append(word[0:15] + "...")
+    else:
+      shortenedWords.append(word)
+
+  return shortenedWords
+
+def report_long_words(words):
+  
+  words = remove_shorter_than_10(words)
+  words = shorten_words(words)
+
+  returnString = "These words are quite long: "
+
+  for word in words:
+    returnString += word + ", "
+
+  if len(words) > 0:
+    returnString = returnString[:-2]
+  
+  return returnString
+
+
+  
 check_that_these_are_equal(
   report_long_words([
     'hello',
