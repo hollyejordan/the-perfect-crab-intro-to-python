@@ -112,14 +112,28 @@ groups_to_check = [
 ]
 
 def is_game_over(board):
+
+  boardFull = True
+
+  for row in board:
+    for cell in row:
+      if cell == ".":
+            boardFull = False
+
   # We go through our groups
   for group in groups_to_check:
+
     # If any of them are empty, they're clearly not a winning row, so we skip
     # them.
     if is_group_complete(board, group[0], group[1], group[2]):
       if are_all_cells_the_same(board, group[0], group[1], group[2]):
         return True # We found a winning row!
         # Note that return also stops the function
+  
+  if boardFull:
+    print("test test")
+    return True
+  
   return False # If we get here, we didn't find a winning row
 
 # And test it out:
