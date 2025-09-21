@@ -40,7 +40,7 @@ def play_game():
     # We then need to convert it to a number using `int`
     row = int(input("Enter a row: "))
     column = int(input("Enter a column: "))
-    board = make_move(board, row, column, player)
+    board, player = make_move(board, row, column, player)
     if player == "X":
       player = "O"
     else:
@@ -56,8 +56,23 @@ def print_board(board):
   return grid
 
 def make_move(board, row, column, player):
-  board[row][column] = player
-  return board
+
+  print(board[row][column])
+
+  if board[row][column] == ".":
+
+    board[row][column] = player
+
+  else:
+    
+    print("That space is already taken.")
+    
+    if player == "X":
+      player = "O"
+    else:
+      player = "X"
+  
+  return board, player
 
 
 # This function will extract three cells from the board
